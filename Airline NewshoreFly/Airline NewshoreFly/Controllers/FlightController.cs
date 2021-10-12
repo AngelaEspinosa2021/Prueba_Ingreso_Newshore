@@ -21,20 +21,29 @@ namespace Airline_NewshoreFly.Controllers
             return View();
         }
 
-        public ActionResult Find(string txtOrigen, string txtDestino, DateTime txtFechaLlegada)
+        [HttpPost]
+        public string Find(string origen, string destino, DateTime fechaLlegada)
         {
             var listFlights = (from m in Data.Flight
-                               where m.DepartureStation==txtOrigen && m.ArrivalStation==txtDestino
-                               select m.DepartureDate==txtFechaLlegada).ToList();
-            if (listFlights == null)
-            {
-                return Content("No hay vuelos disponibles.");
-            }
-            else
-            {
-                return View(listFlights);
-            }            
-        }      
-                               
+                               where m.DepartureStation == origen && m.ArrivalStation == destino && m.DepartureDate == fechaLlegada
+                               select m).ToList();
+            return Newtonsoft.Json.JsonConvert.SerializeObject(listFlights,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+        }
+        
+        public string ListarVuelos()
+        {
+            var vuelos = (from m in Data.Flight
+                          select m).ToList();
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(vuelos,
+                new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
+        }       
     }
 }

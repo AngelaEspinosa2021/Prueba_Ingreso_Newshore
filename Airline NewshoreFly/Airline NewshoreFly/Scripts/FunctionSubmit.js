@@ -6,12 +6,13 @@
         parametro = $(this).serialize();
 
         $.post(url, parametro, function (data) {
-            if (data) {
-                console.log(data);
+            if (data === 0) {
+                alert(data);
             }
             else {
-                alert(data)
+                console.log(data);
             }
         })
     })
 });
+
