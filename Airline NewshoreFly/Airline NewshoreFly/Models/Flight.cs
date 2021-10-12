@@ -17,10 +17,12 @@ namespace Airline_NewshoreFly.Models
         public long Id { get; set; }
         public string DepartureStation { get; set; }
         public string ArrivalStation { get; set; }
-        public Nullable<System.DateTime> DepartureDate { get; set; }
+
+        public DateTime DepartureDate { get; set; }
         public string Transport { get; set; }
         public Nullable<decimal> Price { get; set; }
         public string Currency { get; set; }
+        public string FlightTime { get; set; }
     
         public virtual Transport Transport1 { get; set; }
     }

@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'D:\repos\Prueba de Ingreso Newshore\Airline NewshoreFly\Airline NewshoreFly\Models\AirlineModel.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'D:\repos\Prueba_Ingreso_Newshore\Airline NewshoreFly\Airline NewshoreFly\Models\AirlineModel.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

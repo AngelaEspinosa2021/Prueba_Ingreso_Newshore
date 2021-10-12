@@ -1,7 +1,44 @@
-﻿
+﻿@model Airline_NewshoreFly.Models.Flight
+
 @{
     ViewBag.Title = "Index";
 }
+<script src="~/Scripts/FunctionSubmit.js"></script>
 
 <h2>Index</h2>
 
+<div>
+    <form class="frm">
+        <div class="form-group">
+            <div class="col s4">
+                <input type="text" id="txtOrigen" name="txtOrigen" value="Origen" />
+                <hr />
+            </div>
+            <div class="col s4">
+                <input type="text" id="txtDestino" name="txtDestino" value="Destino" />
+                <hr />
+            </div>
+            <div class="col s4">
+                <input type="date" id="txtFechaLlegada" name="txtFechaLlegada" value="FechaLlegada" />
+                <hr />
+            </div>
+        </div>
+        <div class="form-group center">
+            <div>
+                <input type="submit" value="Buscar Vuelo" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Listado Vuelos Disponibles</h4>
+    </div>
+    <div id="datosVuelosDisponibles">
+
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
+    </div>
+</div>

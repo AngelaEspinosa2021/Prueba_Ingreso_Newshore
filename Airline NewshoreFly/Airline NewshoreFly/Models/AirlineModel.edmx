@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AirlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AirlineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Flight">
           <Key>
             <PropertyRef Name="Id" />
@@ -12,10 +12,11 @@
           <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DepartureStation" Type="varchar" MaxLength="50" />
           <Property Name="ArrivalStation" Type="varchar" MaxLength="50" />
-          <Property Name="DepartureDate" Type="datetime" />
           <Property Name="Transport" Type="varchar" MaxLength="50" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Currency" Type="varchar" MaxLength="50" />
+          <Property Name="DepartureDate" Type="date" />
+          <Property Name="FlightTime" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Transport">
           <Key>
@@ -44,8 +45,7 @@
             <End Role="Transport" EntitySet="Transport" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AirlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -56,11 +56,12 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartureStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ArrivalStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DepartureDate" Type="DateTime" Precision="3" />
+          <Property Name="DepartureDate" Type="DateTime" Precision="0" />
           <Property Name="Transport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Transport1" Relationship="Self.FK_Transport_Flight" FromRole="Flight" ToRole="Transport" />
+          <Property Name="FlightTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Transport">
           <Key>
@@ -99,6 +100,7 @@
           <EntitySetMapping Name="Flight">
             <EntityTypeMapping TypeName="AirlineModel.Flight">
               <MappingFragment StoreEntitySet="Flight">
+                <ScalarProperty Name="FlightTime" ColumnName="FlightTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="DepartureStation" ColumnName="DepartureStation" />
                 <ScalarProperty Name="ArrivalStation" ColumnName="ArrivalStation" />

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AirlineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartureStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ArrivalStation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DepartureDate" Type="DateTime" Precision="0" />
+    <Property Name="Transport" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Transport1" Relationship="Self.FK_Transport_Flight" FromRole="Flight" ToRole="Transport" />
+    <Property Name="FlightTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Transport">
+    <Key>
+      <PropertyRef Name="IdTransport" />
+    </Key>
+    <Property Name="IdTransport" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlightNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Flight" Relationship="Self.FK_Transport_Flight" FromRole="Transport" ToRole="Flight" />
+  </EntityType>
+  <Association Name="FK_Transport_Flight">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Transport" Type="Self.Transport" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Transport">
+        <PropertyRef Name="IdTransport" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AirlineEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Flight" EntityType="Self.Flight" />
+    <EntitySet Name="Transport" EntityType="Self.Transport" />
+    <AssociationSet Name="FK_Transport_Flight" Association="Self.FK_Transport_Flight">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="Transport" EntitySet="Transport" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
